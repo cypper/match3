@@ -24,12 +24,15 @@ class GUIScene extends Phaser.Scene {
     this.gameScene = this.scene.get('GameScene')
 
     this.score = new Score(this, 0, 0, this.gameScene)
+    this.score.setScale(0.8)
     this.add.existing(this.score)
 
-    this.timer = new Timer(this, config.gameWidth - 250, 0, this.gameScene)
+    this.timer = new Timer(this, config.gameWidth - 200, 0, this.gameScene)
+    this.timer.setScale(0.8)
     this.add.existing(this.timer)
 
-    this.info = new Info(this, config.gameWidth / 2 - 250, config.gameHeight - 200, this.gameScene)
+    this.info = new Info(this, config.gameWidth / 2 - 200, config.gameHeight - 150, this.gameScene)
+    this.info.setScale(0.8)
     this.add.existing(this.info)
 
     this.music = new Music(this, config.gameWidth - 100, config.gameHeight - 100, this.gameScene)
@@ -84,7 +87,7 @@ class GUIScene extends Phaser.Scene {
     const image = new Phaser.GameObjects.Image(
       this,
       config.gameWidth / 2,
-      100,
+      config.gameHeight - 200,
       'logo'
     )
     image.setScale(0.7)
@@ -109,7 +112,7 @@ class GUIScene extends Phaser.Scene {
     const image = new Phaser.GameObjects.Image(
       this,
       config.gameWidth / 2,
-      70,
+      config.gameHeight - 200,
       'timeout'
     )
     this.add.existing(image)

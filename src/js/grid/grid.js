@@ -11,9 +11,12 @@ class Grid extends Phaser.GameObjects.Container {
 
     super(scene, x, y)
 
+    this.x = x
+    this.y = y
     this.items = []
     this.selectedItem = null
     this.scene = scene
+    this.guiScene = scene.guiScene
     this.rowLength = options.rowLength
     this.colLength = options.colLength
     this.itemWidth = options.itemWidth
@@ -43,7 +46,7 @@ class Grid extends Phaser.GameObjects.Container {
     const commonItems = itemsIds.slice(0, 3)
     const rareItems = itemsIds.slice(3)
 
-    if (Math.random() < 0.7) return commonItems[Math.floor(Math.random() * commonItems.length)]
+    if (Math.random() < 0.8) return commonItems[Math.floor(Math.random() * commonItems.length)]
     else return rareItems[Math.floor(Math.random() * rareItems.length)]
   }
 
@@ -295,29 +298,29 @@ class Grid extends Phaser.GameObjects.Container {
     if (!this.canMove) return
 
     if (pointer.isDown) {
-      const angle = pointer.angle * 57.2957795
-
       const index = this.getItemIndex(gridItem.id)
       const row = this._getRow(index)
       const col = this._getCol(index)
 
-      if (
-        angle > -45 && angle < 45 && col !== this.rowLength - 1
-      ) {
-        await this.dragItems(gridItem, row, col + 1)
-      } else if (
-        angle >= 45 && angle < 115 && row !== this.colLength - 1
-      ) {
-        await this.dragItems(gridItem, row + 1, col)
-      } else if (
-        ((angle >= 115 && angle < 180) || (angle <= -115 && angle > -180)) &&
-        col !== 0
-      ) {
-        await this.dragItems(gridItem, row, col - 1)
-      } else if (
-        angle > -115 && angle < -45 && row !== 0
-      ) {
-        await this.dragItems(gridItem, row - 1, col)
+      const itemCenter = { x: gridItem.x + this.x, y: gridItem.y + this.y }
+      const projectionPoint = { x: pointer.position.x, y: itemCenter.y }
+
+      const k = this._distanceBetweenPoints(projectionPoint, itemCenter)
+      const n = this._distanceBetweenPoints(projectionPoint, pointer.position)
+      const angle = Math.atan(k / n) * 57.2957795
+
+      if (angle < 45) {
+        if (pointer.position.y > itemCenter.y && row !== this.colLength - 1) {
+          await this.dragItems(gridItem, row + 1, col)
+        } else if (row !== 0) {
+          await this.dragItems(gridItem, row - 1, col)
+        }
+      } else {
+        if (pointer.position.x > itemCenter.x && col !== this.rowLength - 1) {
+          await this.dragItems(gridItem, row, col + 1)
+        } else if (col !== 0) {
+          await this.dragItems(gridItem, row, col - 1)
+        }
       }
     }
   }
@@ -328,6 +331,10 @@ class Grid extends Phaser.GameObjects.Container {
     if (targetItem) {
       await this.swapGridItems(gridItem.id, targetItem.id)
     }
+  }
+
+  _distanceBetweenPoints (p1, p2) {
+    return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2))
   }
 
   async swapGridItems (firstItem, secondItem) {
@@ -349,6 +356,7 @@ class Grid extends Phaser.GameObjects.Container {
   selectItem (id) {
     if (this.selectedItem !== null) this.getItem(this.selectedItem).item.setScale(this.itemScale)
     this.selectedItem = id
+    this.guiScene.music.playSelectMusic()
     this.getItem(id).item.setScale(this.itemScale * 1.1)
   }
 
@@ -401,6 +409,7 @@ class Grid extends Phaser.GameObjects.Container {
 
   async removeItemAnim (item) {
     return new Promise((resolve) => {
+      this.guiScene.music.playKillMusic()
       this.scene.add.tween({
         targets: [item],
         ease: 'Bounce',

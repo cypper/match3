@@ -27,7 +27,8 @@ class MenuScene extends Phaser.Scene {
       'logo'
     )
 
-    this.play = this.add.image(config.gameWidth / 2, config.gameHeight / 2, 'playButton')
+    this.play = this.add.image(config.gameWidth / 2, config.gameHeight / 2 + 100, 'playButton')
+    this.play.setScale(0.6)
     this.play.setInteractive()
       .on('pointerdown', () => {
         this.scene.sendToBack('MenuScene')
@@ -35,10 +36,10 @@ class MenuScene extends Phaser.Scene {
         this.gameScene.beginGame()
       })
       .on('pointerover', () => {
-        this.play.setScale(1.1)
+        this.play.setScale(0.7)
       })
       .on('pointerout', () => {
-        this.play.setScale(1)
+        this.play.setScale(0.6)
       })
 
     this.scene.bringToTop('MenuScene')

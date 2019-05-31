@@ -11,9 +11,9 @@ class Score extends Phaser.GameObjects.Container {
 
     this.image = new Phaser.GameObjects.Image(scene, 0, 0, 'score').setOrigin(0, 0).setScale(0.5)
     this.text = new Phaser.GameObjects.Text(scene, 130, 50, this.score, {
+      fontFamily: 'Fredoka One',
       color: '#baf3f6',
       fontSize: '30px',
-      fontStyle: 'bold',
       align: 'center'
     }).setOrigin(0.5)
 

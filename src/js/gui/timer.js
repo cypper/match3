@@ -6,11 +6,11 @@ class Timer extends Phaser.GameObjects.Container {
 
     this.gameScene = gameScene
 
-    this.image = new Phaser.GameObjects.Image(scene, 0, 0, 'timer').setOrigin(0, 0).setScale(0.5)
-    this.text = new Phaser.GameObjects.Text(scene, 130, 50, this.getTime(), {
+    this.image = new Phaser.GameObjects.Image(scene, 0, 0, 'box').setOrigin(0, 0).setScale(0.5)
+    this.text = new Phaser.GameObjects.Text(scene, 130, 48, this.getTime(), {
+      fontFamily: 'Fredoka One',
       color: '#baf3f6',
       fontSize: '30px',
-      fontStyle: 'bold',
       align: 'center'
     }).setOrigin(0.5)
 

@@ -18,8 +18,6 @@ class GameScene extends Phaser.Scene {
     this.add.image(0, 0, 'background').setOrigin(0, 0)
     this.guiScene = this.scene.get('GUIScene')
     this.menuScene = this.scene.get('MenuScene')
-    this.music = this.sound.add('music', { loop: true })
-    this.music.play()
 
     this.currentLevel = 0
 
@@ -48,27 +46,10 @@ class GameScene extends Phaser.Scene {
     this.events.on('timeout', () => {
       this.gameOver()
     })
-
-    this.events.on('mute-music', () => {
-      this.muteMusic()
-    })
-
-    this.events.on('unmute-music', () => {
-      this.unmuteMusic()
-    })
-  }
-
-  unmuteMusic () {
-    this.music.setMute(false)
-    this.guiScene.music.musicOn()
-  }
-
-  muteMusic () {
-    this.music.setMute(true)
-    this.guiScene.music.musicOff()
   }
 
   async beginGame () {
+    this.guiScene.music.startMusic()
     await this.startLevel(this.currentLevel)
   }
 
@@ -111,7 +92,7 @@ class GameScene extends Phaser.Scene {
     this.guiScene.startLevel(levelConfig.name, levelConfig.scoreReach, levelConfig.time)
 
     const gridX = (config.gameWidth / 2) - (gridConfig.rowLength * gridConfig.itemWidth) / 2
-    this.grid = new Grid(this, gridX, 100, gridConfig)
+    this.grid = new Grid(this, gridX, 70, gridConfig)
     this.add.existing(this.grid)
 
     await this.grid.flushGrid()

@@ -6,11 +6,11 @@ class Info extends Phaser.GameObjects.Container {
 
     this.gameScene = gameScene
 
-    this.image = new Phaser.GameObjects.Image(scene, 0, 0, 'timer').setOrigin(0, 0)
+    this.image = new Phaser.GameObjects.Image(scene, 0, 0, 'box').setOrigin(0, 0)
     this.text = new Phaser.GameObjects.Text(scene, 260, 100, '', {
+      fontFamily: 'Fredoka One',
       color: '#baf3f6',
       fontSize: '16px',
-      fontStyle: 'bold',
       align: 'center'
     }).setOrigin(0.5)
 

@@ -1,6 +1,6 @@
 export default {
-  gameWidth: 1000,
-  gameHeight: 800,
+  gameWidth: 800,
+  gameHeight: 600,
   images: {
     item1: './assets/images/game/gem-01.png',
     item2: './assets/images/game/gem-02.png',
@@ -13,12 +13,14 @@ export default {
     score: 'assets/images/bg-score.png',
     logo: 'assets/images/donuts_logo.png',
     music: 'assets/images/btn-sfx.png',
-    timer: 'assets/images/bg-timer.png',
+    box: 'assets/images/bg-timer.png',
     hand: 'assets/images/game/hand.png',
     timeout: 'assets/images/text-timeup.png'
   },
   sounds: {
-    music: ['assets/audio/background.mp3']
+    music: ['assets/audio/background.mp3'],
+    kill: ['assets/audio/kill.mp3'],
+    select: ['assets/audio/select-1.mp3']
   },
   levels: [
     {
@@ -26,9 +28,9 @@ export default {
       grid: {
         rowLength: 3,
         colLength: 3,
-        itemWidth: 80,
-        itemHeight: 80,
-        itemScale: 0.9,
+        itemWidth: 60,
+        itemHeight: 60,
+        itemScale: 0.7,
         values: [
           'item3', 'item1', 'item2',
           'item3', 'item5', 'item1',
@@ -41,11 +43,11 @@ export default {
     {
       name: '1',
       grid: {
-        rowLength: 5,
-        colLength: 5,
-        itemWidth: 80,
-        itemHeight: 80,
-        itemScale: 0.9
+        rowLength: 6,
+        colLength: 6,
+        itemWidth: 60,
+        itemHeight: 60,
+        itemScale: 0.7
       },
       scoreReach: 200,
       time: 130
@@ -53,11 +55,11 @@ export default {
     {
       name: '2',
       grid: {
-        rowLength: 5,
+        rowLength: 6,
         colLength: 6,
-        itemWidth: 80,
-        itemHeight: 80,
-        itemScale: 0.9
+        itemWidth: 60,
+        itemHeight: 60,
+        itemScale: 0.7
       },
       scoreReach: 350,
       time: 120
@@ -65,11 +67,11 @@ export default {
     {
       name: '3',
       grid: {
-        rowLength: 6,
+        rowLength: 7,
         colLength: 6,
-        itemWidth: 80,
-        itemHeight: 80,
-        itemScale: 0.9
+        itemWidth: 60,
+        itemHeight: 60,
+        itemScale: 0.7
       },
       scoreReach: 500,
       time: 100
@@ -79,9 +81,9 @@ export default {
       grid: {
         rowLength: 7,
         colLength: 6,
-        itemWidth: 80,
-        itemHeight: 80,
-        itemScale: 0.9
+        itemWidth: 60,
+        itemHeight: 60,
+        itemScale: 0.7
       },
       scoreReach: 700,
       time: 90
@@ -91,9 +93,9 @@ export default {
       grid: {
         rowLength: 8,
         colLength: 6,
-        itemWidth: 80,
-        itemHeight: 80,
-        itemScale: 0.9
+        itemWidth: 60,
+        itemHeight: 60,
+        itemScale: 0.7
       },
       scoreReach: 900,
       time: 80
@@ -103,9 +105,9 @@ export default {
       grid: {
         rowLength: 9,
         colLength: 6,
-        itemWidth: 80,
-        itemHeight: 80,
-        itemScale: 0.9
+        itemWidth: 60,
+        itemHeight: 60,
+        itemScale: 0.7
       },
       scoreReach: 1100,
       time: 80
@@ -115,9 +117,9 @@ export default {
       grid: {
         rowLength: 12,
         colLength: 6,
-        itemWidth: 80,
-        itemHeight: 80,
-        itemScale: 0.9
+        itemWidth: 60,
+        itemHeight: 60,
+        itemScale: 0.7
       },
       scoreReach: 1500,
       time: 60

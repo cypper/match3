@@ -7,9 +7,9 @@ class LevelMenu extends Phaser.GameObjects.Container {
     super(scene, x, y)
     this.menuItems = []
 
-    this.image = new Phaser.GameObjects.Image(scene, 0, 50, 'timer')
+    this.image = new Phaser.GameObjects.Image(scene, 0, 0, 'box')
       .setOrigin(0, 0)
-      .setScale(1, 3)
+      .setScale(1, 2)
     this.add(this.image)
 
     for (const { text, onClick } of items) {
@@ -18,7 +18,7 @@ class LevelMenu extends Phaser.GameObjects.Container {
   }
 
   addMenuItem (text, onClick) {
-    const menuItem = new MenuItem(this.scene, 150, 270 + this.menuItems.length * 40, text, onClick)
+    const menuItem = new MenuItem(this.scene, 250, 160 + this.menuItems.length * 40, text, onClick)
     this.menuItems.push(menuItem)
     this.add(menuItem)
   }
